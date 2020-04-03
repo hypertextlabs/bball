@@ -1,0 +1,6 @@
+
+.env
+.env.list
+.dockerignore
+.vscode/
+venv/
