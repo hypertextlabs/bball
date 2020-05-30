@@ -13,10 +13,29 @@ app = FastAPI(
     redoc_url=None,
 )
 
-@app.get("/pbp/")
+envk = os.getenv('SR_KEY') 
+KEY = f"/pbp.json?api_key={envk}"
+
+BASE_URL = 'http://api.sportradar.us/nbdl/trial/v7/en/'
+URL_K = 'games/'
+
+# GET Play by play 
+@app.get("/playbyplay")
 def play_by_play(gameId: str):
-    key = os.getenv('SR_KEY') 
-    url = f"http://api.sportradar.us/nbdl/trial/v7/en/games/{gameId}/pbp.json?api_key={key}" 
+    url = f"{BASE_URL}{URL_K}{gameId}{KEY}" 
     response = httpx.get(url)
     return response.json()
 
+# GET Team breakdown
+@app.get("/team")
+def player_profile(playerId: str):
+    url = f"{BASE_URL}{URL_K}{gameId}{KEY}" 
+    response = httpx.get(url)
+    return response.json()
+
+# GET Player breakdown
+@app.get("/player")
+def player_profile(playerId: str):
+    url = f"{BASE_URL}{URL_K}{gameId}{KEY}" 
+    response = httpx.get(url)
+    return response.json()
